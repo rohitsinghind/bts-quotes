@@ -1,5 +1,6 @@
 import "./style.css";
 import quotes from "./quotes";
+import A11yDialog from "a11y-dialog";
 
 const GRADIENTS = [
   "linear-gradient(to left, #b6fbff, #83a4d4)",
@@ -76,7 +77,6 @@ $newQuote.addEventListener("click", async () => {
   applyRandomGradient($body);
 });
 
-const A11yDialog = (await import("a11y-dialog")).default;
 const container = document.querySelector("#my-dialog");
 const dialog = new A11yDialog(container);
 
