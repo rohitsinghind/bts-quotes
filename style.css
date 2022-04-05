@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,700");
+
+:root {
+  --font-size: 3vw;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Maven Pro", sans-serif;
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: 10% auto;
+  margin: 0;
+  transition: background 0.2s ease-in-out;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header,
+.main {
+  padding: 1rem 2.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  color: #fff;
+}
+
+.buttons {
+  margin-top: 2.5rem;
+}
+
+h1 {
+  color: #fff;
+}
+
+button {
+  background: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+#quote {
+  width: 75%;
+  font-size: var(--font-size);
+}
+
+#member {
+  font-size: calc(var(--font-size) / 3);
+}
+
+#quote-container {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.image-controls {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  top: calc(100% - 2em);
+  left: 50%;
+  display: flex;
+  width: max-content;
+  margin: 1em auto 0;
+  background-color: rgba(26, 26, 26, 0.8);
+  border-radius: 5px;
+}
+
+.image-controls button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(142, 142, 142);
+  padding: 0.5rem 0.75rem;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.image-controls button:not(:last-child) {
+  border-right: 1px solid rgb(142, 142, 142);
+}
+
+.image-controls button.active {
+  color: #fff;
+}
+
+.image-controls svg {
+  margin-left: 0.5rem;
+}
+
+.dialog-container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.dialog-container[aria-hidden="true"] {
+  display: none;
+}
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(43, 46, 56, 0.9);
+  animation: fade-in 200ms both;
+}
+
+.dialog-content {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  margin: auto;
+  z-index: 2;
+  position: relative;
+  animation: fade-in 400ms 200ms both, slide-up 400ms 200ms both;
+  padding: 1em;
+  max-width: 90%;
+  width: max-content;
+  border-radius: 5px;
+}
+
+.modal.show .modal-dialog {
+  transform: none;
+}
+.modal.fade .modal-dialog {
+  transition: transform 0.3s ease-out;
+  transform: translate(0, -50px);
+}
+@media (min-width: 576px) {
+  .dialog-content {
+    height: calc(100% - 3.5rem);
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .dialog-content {
+    padding: 2em;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(10%);
+  }
+}
+
+.dialog-close {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 1.25em;
+  width: 1.2em;
+  height: 1.2em;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+@media screen and (min-width: 700px) {
+  .dialog-close {
+    top: 0.5em;
+    right: 0.5em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --font-size: 6.3vw;
+  }
+  #quote {
+    width: 100%;
+    font-size: var(--font-size);
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "bts-quotes",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.9.0"
+  },
+  "dependencies": {
+    "a11y-dialog": "^7.4.0",
+    "dom-to-image": "^2.6.0"
+  }
+}
