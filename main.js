@@ -1,6 +1,5 @@
 import "./style.css";
 import quotes from "./quotes";
-import A11yDialog from "a11y-dialog";
 
 const GRADIENTS = [
   "linear-gradient(to left, #b6fbff, #83a4d4)",
@@ -24,7 +23,6 @@ const GRADIENTS = [
 
 const $body = document.querySelector("body");
 const $newQuote = document.querySelector("#new-quote");
-const $image = document.querySelector("#image");
 const $share = document.querySelector("#share");
 
 applyRandomGradient($body);
@@ -37,24 +35,15 @@ function applyRandomGradient(el) {
 }
 
 function applyRandomQuote() {
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  const params = new URLSearchParams(location.search);
+  const index =
+    params.get("quote") || Math.floor(Math.random() * quotes.length);
+  const randomQuote = quotes[index];
   const $quote = document.querySelector("#quote");
   const $member = document.querySelector("#member");
   $quote.innerText = randomQuote.quote;
   $member.innerText = `- ${randomQuote.member}`;
-}
-
-function getNearestDimensions(node) {
-  const DIMENSIONS_AVAILABLE = [1280, 1920];
-  const HEIGHT = {
-    1280: 720,
-    1920: 1080,
-  };
-  const { width } = node.getBoundingClientRect();
-  const nearestDimension = DIMENSIONS_AVAILABLE.reduce((acc, curr) => {
-    return Math.abs(curr - width) < Math.abs(acc - width) ? curr : acc;
-  });
-  return { width: nearestDimension, height: HEIGHT[nearestDimension] };
+  $quote.setAttribute("data-id", index);
 }
 
 async function downloadImage() {
@@ -77,6 +66,7 @@ $newQuote.addEventListener("click", async () => {
   applyRandomGradient($body);
 });
 
+const A11yDialog = (await import("a11y-dialog")).default;
 const container = document.querySelector("#my-dialog");
 const dialog = new A11yDialog(container);
 
@@ -122,7 +112,7 @@ $share.addEventListener("click", async () => {
   const data = {
     title,
     text,
-    url,
+    url: `${url}?quote=${quote.getAttribute("data-id")}`,
   };
   try {
     await navigator.share(data);
